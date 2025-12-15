@@ -5,6 +5,14 @@ import { Button } from '../ui/Button';
 import { useState } from 'react';
 import { sendEmail } from '../../lib/email';
 
+const footerLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'About Us', path: '/about' },
+  { name: 'Vision & Mission', path: '/vision-mission' },
+  { name: 'Careers', path: '/contact' }, // Mapped to contact as no specific careers page exists
+  { name: 'Contact', path: '/contact' },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -65,11 +73,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-6 text-white">Company</h3>
             <ul className="space-y-3 text-sm text-slate-400">
-              {['Home', 'About Us', 'Vision & Mission', 'Careers', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link to="/" className="hover:text-secondary transition-colors flex items-center gap-2 group">
+              {footerLinks.map((item) => (
+                <li key={item.name}>
+                  <Link to={item.path} className="hover:text-secondary transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -ml-5 group-hover:ml-0 text-secondary" />
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}

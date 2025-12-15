@@ -5,10 +5,10 @@ import { Button } from '../components/ui/Button';
 import { useRef } from 'react';
 
 const services = [
-  { icon: Code, title: "Web Development", desc: "Scalable, high-performance web solutions." },
-  { icon: Smartphone, title: "App Development", desc: "Native & cross-platform mobile experiences." },
-  { icon: Share2, title: "Digital Marketing", desc: "Data-driven strategies for growth." },
-  { icon: Cpu, title: "AI Solutions", desc: "Intelligent automation & analytics." },
+  { icon: Code, title: "Web Development", desc: "Scalable, high-performance web solutions.", id: "web-development" },
+  { icon: Smartphone, title: "App Development", desc: "Native & cross-platform mobile experiences.", id: "app-development" },
+  { icon: Share2, title: "Digital Marketing", desc: "Data-driven strategies for growth.", id: "digital-marketing" },
+  { icon: Cpu, title: "AI Solutions", desc: "Intelligent automation & analytics.", id: "ai-solutions" },
 ];
 
 export default function Home() {
@@ -106,18 +106,22 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group p-8 rounded-2xl bg-surface/40 border border-white/5 hover:border-secondary hover:bg-surface/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-neon-cyan"
+                className="group p-8 rounded-2xl bg-surface/40 border border-white/5 hover:border-secondary hover:bg-surface/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-neon-cyan h-full flex flex-col"
               >
                 <div className="w-14 h-14 rounded-xl bg-surface-light border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:border-secondary/50">
                   <service.icon className="w-7 h-7 text-secondary group-hover:text-white transition-colors" />
                 </div>
                 
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-secondary transition-colors">{service.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">{service.desc}</p>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{service.desc}</p>
                 
-                <div className="flex items-center text-secondary text-sm font-medium group-hover:text-white transition-colors">
+                {/* Updated Link to point to Services page with ID */}
+                <Link 
+                  to={`/services#${service.id}`} 
+                  className="flex items-center text-secondary text-sm font-medium group-hover:text-white transition-colors mt-auto"
+                >
                   Access Module <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

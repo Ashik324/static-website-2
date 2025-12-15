@@ -29,8 +29,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'], // Added for code/tech feel
+        sans: ['Poppins', 'sans-serif'], // Changed to Poppins
+        mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
         'neon-cyan': '0 0 5px theme("colors.secondary.DEFAULT"), 0 0 20px theme("colors.secondary.dim")',

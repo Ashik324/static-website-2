@@ -7,6 +7,7 @@ const servicesList = [
   {
     icon: Code,
     title: "Web Development",
+    id: "web-development",
     description: "Blazing fast, visceral web experiences.",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: ["React / Next.js", "3D WebGL", "Micro-interactions"]
@@ -14,13 +15,15 @@ const servicesList = [
   {
     icon: Smartphone,
     title: "App Development",
+    id: "app-development",
     description: "Native apps that feel alive in your hand.",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: ["iOS & Android", "Haptic Feedback", "Fluid Motion"]
   },
   {
     icon: Share2,
-    title: "Social Marketing",
+    title: "Digital Marketing", // Renamed from Social Marketing to match Home page
+    id: "digital-marketing",
     description: "Campaigns that trigger dopamine loops.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: ["Viral Content", "Community Growth", "Influencer Ops"]
@@ -28,6 +31,7 @@ const servicesList = [
   {
     icon: Cpu,
     title: "AI Solutions",
+    id: "ai-solutions",
     description: "Next-gen intelligence for automation.",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: ["Predictive Models", "Chatbots", "Data Mining"]
@@ -43,7 +47,8 @@ export default function Services() {
             <h1 className="text-6xl md:text-8xl font-black mb-6 text-white tracking-tighter">
               OUR <span className="text-transparent bg-clip-text bg-gradient-tech drop-shadow-[0_0_10px_rgba(188,19,254,0.5)]">ARSENAL</span>
             </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto font-mono text-sm">TOOLS // WEAPONS // CAPABILITIES</p>
+            {/* Changed WEAPONS to SYSTEMS */}
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto font-mono text-sm">TOOLS // SYSTEMS // CAPABILITIES</p>
          </div>
       </div>
 
@@ -52,11 +57,12 @@ export default function Services() {
           {servicesList.map((service, index) => (
             <motion.div
               key={index}
+              id={service.id} // Added ID for navigation
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group bg-surface/40 backdrop-blur-sm rounded-[2rem] overflow-hidden border border-white/10 hover:border-secondary/50 transition-all duration-500 hover:shadow-neon-cyan"
+              className="group bg-surface/40 backdrop-blur-sm rounded-[2rem] overflow-hidden border border-white/10 hover:border-secondary/50 transition-all duration-500 hover:shadow-neon-cyan scroll-mt-28"
             >
               {/* Image Area */}
               <div className="relative h-64 overflow-hidden">

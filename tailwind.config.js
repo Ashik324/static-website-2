@@ -29,7 +29,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'], // Changed to Poppins
+        sans: ['Poppins', 'sans-serif'], // Enforcing Poppins as the main font
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
@@ -41,21 +41,15 @@ export default {
       backgroundImage: {
         'gradient-tech': 'linear-gradient(135deg, #00F0FF 0%, #BC13FE 100%)',
         'gradient-dark': 'linear-gradient(to bottom, #030014, #0F0728)',
-        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-20px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px #00F0FF, 0 0 10px #00F0FF' },
-          '100%': { boxShadow: '0 0 10px #BC13FE, 0 0 20px #BC13FE' },
         }
       },
     },

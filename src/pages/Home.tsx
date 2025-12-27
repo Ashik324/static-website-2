@@ -115,7 +115,7 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-secondary transition-colors">{service.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{service.desc}</p>
                 
-                {/* Updated Link to point to Services page with ID */}
+                {/* Direct Link to Service Card ID */}
                 <Link 
                   to={`/services#${service.id}`} 
                   className="flex items-center text-secondary text-sm font-medium group-hover:text-white transition-colors mt-auto"

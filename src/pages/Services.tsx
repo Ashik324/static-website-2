@@ -22,7 +22,7 @@ const servicesList = [
   },
   {
     icon: Share2,
-    title: "Digital Marketing", // Renamed from Social Marketing to match Home page
+    title: "Digital Marketing",
     id: "digital-marketing",
     description: "Campaigns that trigger dopamine loops.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -45,9 +45,8 @@ export default function Services() {
          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-secondary/10 via-primary to-primary" />
          <div className="container mx-auto px-4 relative z-10">
             <h1 className="text-6xl md:text-8xl font-black mb-6 text-white tracking-tighter">
-              OUR <span className="text-transparent bg-clip-text bg-gradient-tech drop-shadow-[0_0_10px_rgba(188,19,254,0.5)]">ARSENAL</span>
+              OUR <span className="text-transparent bg-clip-text bg-gradient-tech drop-shadow-[0_0_10px_rgba(188,19,254,0.5)]">SOLUTIONS</span>
             </h1>
-            {/* Changed WEAPONS to SYSTEMS */}
             <p className="text-xl text-slate-300 max-w-2xl mx-auto font-mono text-sm">TOOLS // SYSTEMS // CAPABILITIES</p>
          </div>
       </div>
@@ -57,16 +56,15 @@ export default function Services() {
           {servicesList.map((service, index) => (
             <motion.div
               key={index}
-              id={service.id} // Added ID for navigation
+              id={service.id} // ID used for navigation anchoring
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group bg-surface/40 backdrop-blur-sm rounded-[2rem] overflow-hidden border border-white/10 hover:border-secondary/50 transition-all duration-500 hover:shadow-neon-cyan scroll-mt-28"
+              className="group bg-surface/40 backdrop-blur-sm rounded-[2rem] overflow-hidden border border-white/10 hover:border-secondary/50 transition-all duration-500 hover:shadow-neon-cyan scroll-mt-32"
             >
               {/* Image Area */}
               <div className="relative h-64 overflow-hidden">
-                {/* Gradient overlay that allows color to show through */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-primary/90 z-10" />
                 <img 
                   src={service.image} 

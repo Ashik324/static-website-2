@@ -6,6 +6,7 @@ import VisionMission from './pages/VisionMission';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Enquiry from './pages/Enquiry';
+import Credits from './pages/Credits';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="services" element={<Services />} />
           <Route path="contact" element={<Contact />} />
           <Route path="enquiry" element={<Enquiry />} />
+          <Route path="credits" element={<Credits />} />
         </Route>
       </Routes>
     </Router>

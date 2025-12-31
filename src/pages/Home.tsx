@@ -64,14 +64,14 @@ export default function Home() {
             </motion.div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight tracking-tight">
-              Empowering <br />
+              Unleash Your <br />
               <span className="text-transparent bg-clip-text bg-gradient-tech drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
-                Digital Intelligence
+                Digital Potential
               </span>
             </h1>
             
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              <strong className="text-white">Tech Thrive Technology</strong> bridges the gap between human potential and artificial intelligence. We engineer the future.
+              Turning complex challenges into elegant, scalable solutions.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

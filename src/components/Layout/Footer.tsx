@@ -59,7 +59,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-              {COMPANY_DETAILS.tagline}. We engineer digital growth through innovation and excellence.
+              {COMPANY_DETAILS.tagline}. Turning complex challenges into elegant, scalable solutions.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (

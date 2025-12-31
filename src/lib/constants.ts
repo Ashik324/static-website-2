@@ -12,7 +12,7 @@ export const COMPANY_DETAILS = {
   // Other Contact Info
   email: "contact@techthrive.com",
   phone: "+971 56 426 3136",
-  address: "123 Tech Park, Innovation St, Silicon Valley, CA 94025",
+  address: "flat no 1, building 192, Asharej, Al Ain, Abu Dhabi",
   
   // Social Links
   socials: {

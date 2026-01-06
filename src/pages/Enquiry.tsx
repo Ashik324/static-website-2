@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle2, MessageCircle } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { useState } from 'react';
-import { sendEmail } from '../lib/email';
+import { COMPANY_DETAILS } from '../lib/constants';
 
 type FormData = {
   name: string;
@@ -15,26 +15,24 @@ type FormData = {
 
 export default function Enquiry() {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    setError(null);
-    try {
-      await sendEmail({
-        to_name: "Tech Thrive Team",
-        from_name: data.name,
-        from_email: data.email,
-        phone: data.phone,
-        service: data.service,
-        message: data.message,
-        reply_to: data.email,
-      });
-      setIsSubmitted(true);
-      reset();
-    } catch (err) {
-      setError("Failed to send message. Please try again later or contact us via WhatsApp.");
-    }
+    // Construct the WhatsApp Message
+    const text = `*New Project Enquiry (Dedicated Page)* 🚀%0A%0A` +
+      `*Name:* ${data.name}%0A` +
+      `*Email:* ${data.email}%0A` +
+      `*Phone:* ${data.phone}%0A` +
+      `*Service:* ${data.service}%0A` +
+      `*Details:* ${data.message}`;
+
+    // Redirect to WhatsApp
+    const url = `https://wa.me/${COMPANY_DETAILS.whatsappNumber}?text=${text}`;
+    window.open(url, '_blank');
+
+    // Show success state
+    setIsSubmitted(true);
+    reset();
   };
 
   return (
@@ -54,15 +52,15 @@ export default function Enquiry() {
               animate={{ opacity: 1, scale: 1 }}
               className="bg-surface/50 backdrop-blur-md p-12 rounded-3xl shadow-neon-cyan text-center border border-secondary/50"
             >
-              <div className="w-20 h-20 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-6 border border-secondary shadow-neon-cyan">
+              <div className="w-20 h-20 bg-[#25D366]/10 text-[#25D366] rounded-full flex items-center justify-center mx-auto mb-6 border border-[#25D366] shadow-neon-cyan">
                 <CheckCircle2 size={40} />
               </div>
-              <h2 className="text-3xl font-bold text-white mb-4">Transmission Received</h2>
+              <h2 className="text-3xl font-bold text-white mb-4">WhatsApp Opened</h2>
               <p className="text-slate-400 text-lg mb-8">
-                Your enquiry has been successfully logged in our system. Our team will establish contact within 24 hours.
+                We have redirected your enquiry to WhatsApp. Please hit the <strong>send button</strong> in the chat to complete the process.
               </p>
               <Button onClick={() => setIsSubmitted(false)} variant="outline">
-                Send Another Message
+                Submit Another Enquiry
               </Button>
             </motion.div>
           ) : (
@@ -73,15 +71,8 @@ export default function Enquiry() {
             >
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-white">Project Parameters</h2>
-                <p className="text-slate-400 mt-2 font-mono text-sm">Fill out the data fields below.</p>
+                <p className="text-slate-400 mt-2 font-mono text-sm">Fill out the data fields below to start a WhatsApp chat.</p>
               </div>
-
-              {error && (
-                <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3 text-red-400">
-                  <AlertCircle size={20} />
-                  <p className="text-sm">{error}</p>
-                </div>
-              )}
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -163,8 +154,8 @@ export default function Enquiry() {
                     className="w-full md:w-auto min-w-[200px] shadow-neon-purple"
                     isLoading={isSubmitting}
                   >
-                    {!isSubmitting && <Send className="w-4 h-4 mr-2" />}
-                    Submit Enquiry
+                    {!isSubmitting && <MessageCircle className="w-4 h-4 mr-2" />}
+                    Send via WhatsApp
                   </Button>
                 </div>
               </form>

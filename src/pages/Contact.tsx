@@ -1,10 +1,43 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageCircle, Send, Globe, ChevronDown } from 'lucide-react';
 import { COMPANY_DETAILS } from '../lib/constants';
+import { Button } from '../components/ui/Button';
 
 export default function Contact() {
   const { whatsappNumber, whatsappMessage } = COMPANY_DETAILS;
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    countryCode: '+971',
+    phone: '',
+    service: '',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleEnquire = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Construct the WhatsApp Message
+    const text = `*New Project Enquiry from Website* 🚀%0A%0A` +
+      `*Name:* ${formData.name}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Phone:* ${formData.countryCode} ${formData.phone}%0A` +
+      `*Service:* ${formData.service || 'Not Specified'}%0A` +
+      `*Details:* ${formData.message}`;
+
+    // Redirect to WhatsApp
+    const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <div className="bg-primary min-h-screen">
@@ -17,7 +50,7 @@ export default function Contact() {
 
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Details */}
+          {/* Left Column: Contact Details */}
           <div className="space-y-8">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -103,20 +136,125 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Map Placeholder */}
+          {/* Right Column: WhatsApp Enquiry Form */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="h-full min-h-[400px] bg-surface rounded-2xl overflow-hidden shadow-glass border border-white/10 relative group"
+            className="bg-surface border border-white/10 rounded-2xl overflow-hidden shadow-neon-cyan/20 relative flex flex-col"
           >
-             {/* Simulating a map */}
-             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" />
-             <div className="absolute inset-0 bg-secondary/10 mix-blend-overlay" />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-primary/80 backdrop-blur px-6 py-3 rounded-full shadow-neon-cyan text-white font-semibold flex items-center gap-2 border border-secondary/50">
-                   <MapPin size={18} className="text-secondary" />
-                   Locate Us on Map
+             {/* Header Strip */}
+             <div className="bg-gradient-tech p-1"></div>
+             
+             <div className="p-8 md:p-10 flex-grow flex flex-col">
+                <div className="mb-8 text-center">
+                  <h2 className="text-3xl font-bold text-white mb-2">Get Your <span className="text-secondary">Free Quote!</span></h2>
+                  <p className="text-slate-400 text-sm">Fill the form below to start your project conversation on WhatsApp.</p>
                 </div>
+
+                <form onSubmit={handleEnquire} className="space-y-5">
+                  {/* Name */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Name*</label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter your full name"
+                      className="w-full px-4 py-3 rounded-xl bg-primary/50 border border-white/10 text-white placeholder-slate-600 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Email ID</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Enter your email address"
+                      className="w-full px-4 py-3 rounded-xl bg-primary/50 border border-white/10 text-white placeholder-slate-600 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all"
+                    />
+                  </div>
+
+                  {/* Phone Number (Split) */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Contact Number*</label>
+                    <div className="flex gap-3">
+                      <div className="relative w-1/3 md:w-1/4">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <Globe className="h-4 w-4 text-slate-500" />
+                        </div>
+                        <input
+                          type="text"
+                          name="countryCode"
+                          value={formData.countryCode}
+                          onChange={handleInputChange}
+                          placeholder="+971"
+                          className="w-full pl-9 pr-3 py-3 rounded-xl bg-primary/50 border border-white/10 text-white placeholder-slate-600 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all text-center"
+                        />
+                      </div>
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="50 123 4567"
+                        className="flex-1 px-4 py-3 rounded-xl bg-primary/50 border border-white/10 text-white placeholder-slate-600 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Service Selection */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Service*</label>
+                    <div className="relative">
+                      <select
+                        name="service"
+                        required
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl bg-primary/50 border border-white/10 text-white focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" className="bg-surface text-slate-400">Select a Service...</option>
+                        <option value="Web Development" className="bg-surface">Web Development</option>
+                        <option value="App Development" className="bg-surface">App Development</option>
+                        <option value="Digital Marketing" className="bg-surface">Digital Marketing</option>
+                        <option value="AI Solutions" className="bg-surface">AI Solutions</option>
+                        <option value="Other" className="bg-surface">Other</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400">
+                        <ChevronDown size={16} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Project Details</label>
+                    <textarea
+                      name="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell us a bit about your project..."
+                      className="w-full px-4 py-3 rounded-xl bg-primary/50 border border-white/10 text-white placeholder-slate-600 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all resize-none"
+                    />
+                  </div>
+
+                  {/* Submit Button */}
+                  <Button 
+                    type="submit" 
+                    variant="gradient" 
+                    className="w-full py-6 text-lg font-bold shadow-neon-purple mt-4 group"
+                  >
+                    ENQUIRE NOW 
+                    <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </form>
              </div>
           </motion.div>
         </div>

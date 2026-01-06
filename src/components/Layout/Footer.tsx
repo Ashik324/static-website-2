@@ -11,7 +11,6 @@ const footerLinks = [
   { name: 'Vision & Mission', path: '/vision-mission' },
   { name: 'Careers', path: '/contact' },
   { name: 'Contact', path: '/contact' },
-  { name: 'Credits', path: '/credits' },
 ];
 
 export default function Footer() {
@@ -141,7 +140,6 @@ export default function Footer() {
             <a href="#" className="hover:text-secondary transition-colors">Privacy</a>
             <a href="#" className="hover:text-secondary transition-colors">Terms</a>
             <a href="#" className="hover:text-secondary transition-colors">Sitemap</a>
-            <Link to="/credits" className="hover:text-secondary transition-colors">Credits</Link>
           </div>
         </div>
       </div>
